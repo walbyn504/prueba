@@ -7,12 +7,11 @@ const crearVehiculo = async (req, res) => {
         const vehiculo = new Vehiculo({
             marca: req.body.marca,
             modelo: req.body.modelo,
-            anno: req.body.anno,
+            anio: req.body.anio,
             precio: req.body.precio
         });
 
         const vehiculoCreado = await vehiculo.save();
-        res.header('Location', `/vehiculo/${vehiculoCreado._id}`);
         res.status(201).json(vehiculoCreado);
 
     } catch (error) {
@@ -20,17 +19,16 @@ const crearVehiculo = async (req, res) => {
     }
 };
 
-
 const editarVehiculo = async (req, res) => {
     try {
         const id = req.params.id;
         const body = req.body;
-        const opciones = { new: true };
-        const updatedVehiculo = await Vehiculo.findByIdAndUpdate(id, body, opciones);
+        const opciopnes = { new: true };
+        const updatedVehiculo = await Vehiculo.findByIdAndUpdate(id, body, opciopnes);
         if (!updatedVehiculo) { 
             return res.status(404);
         }
-       res.status(200).json(updatedVehiculo);
+        res.json(updatedVehiculo);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -47,10 +45,10 @@ const eliminarVehiculo = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-};4
+};
 
 module.exports = {
     crearVehiculo,
     editarVehiculo,
     eliminarVehiculo
-}; 
+};
