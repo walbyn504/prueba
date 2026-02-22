@@ -12,6 +12,7 @@ const crearVehiculo = async (req, res) => {
         });
 
         const vehiculoCreado = await vehiculo.save();
+        res.header('Location', `/vehiculo/${vehiculoCreado._id}`);
         res.status(201).json(vehiculoCreado);
 
     } catch (error) {
