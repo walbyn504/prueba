@@ -4,7 +4,8 @@ const router = express.Router();
 const {
     crearVehiculo,
     editarVehiculo,
-    eliminarVehiculo
+    eliminarVehiculo,
+    marcarVendido
 } = require('../controladores/vehiculo');
 
 //Post Method
@@ -16,5 +17,7 @@ router.put('/vehiculo/:id', editarVehiculo);
 // Eliminar vehículo por ID
 router.delete('/vehiculo/:id', eliminarVehiculo);
 
+// Cambiar a vendido
+router.patch('/vehiculo/vendido/:id', marcarVendido);
 
 module.exports = router;
