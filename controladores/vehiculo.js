@@ -47,7 +47,7 @@ const eliminarVehiculo = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-};
+};4
 
 module.exports = {
     crearVehiculo,
