@@ -20,6 +20,7 @@ const crearVehiculo = async (req, res) => {
     }
 };
 
+
 const editarVehiculo = async (req, res) => {
     try {
         const vehiculo = await Vehiculo.findById(req.params.id);
