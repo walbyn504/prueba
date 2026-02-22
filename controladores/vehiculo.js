@@ -21,18 +21,34 @@ const crearVehiculo = async (req, res) => {
 
 const editarVehiculo = async (req, res) => {
     try {
-        const vehiculo = await Vehiculo.findById(req.params.id);
-        if (!vehiculo) {
-            return res.status(404).json({ message: "Vehículo no encontrado" });
+        const id = req.params.id;
+        const body = req.body;
+        const opciopnes = { new: true };
+        const updatedVehiculo = await Vehiculo.findByIdAndUpdate(id, body, opciopnes);
+        if (!updatedVehiculo) { 
+            return res.status(404);
         }
-        vehiculo.marca = req.body.marca || vehiculo.marca;
-        vehiculo.modelo = req.body.modelo || vehiculo.modelo;
-        vehiculo.anio = req.body.anio || vehiculo.anio;
-        vehiculo.precio = req.body.precio || vehiculo.precio;
-
-        const vehiculoActualizado = await vehiculo.save();
-        res.json(vehiculoActualizado);
+        res.json(updatedVehiculo);
     } catch (error) {
         res.status(400).json({ message: error.message });
-    } 
+    }
+};
+
+const eliminarVehiculo = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deletedVehiculo = await Vehiculo.findByIdAndDelete(id);
+        if (!deletedVehiculo) {
+            return res.status(404);
+        }
+        res.status(200);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+module.exports = {
+    crearVehiculo,
+    editarVehiculo,
+    eliminarVehiculo
 };
